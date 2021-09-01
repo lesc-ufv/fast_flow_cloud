@@ -1,0 +1,12 @@
+{
+    "id": 0,
+    "num_pe": 128,
+    "num_pe_in": 8,
+    "num_pe_out": 8,
+    "data_width": 16,
+    "net_radix": 8,
+    "extra_stagies": 1,
+    "conf_depth": 1,
+    "conf_bus_width": 8,
+    "conf_bus_pipe": 1
+}

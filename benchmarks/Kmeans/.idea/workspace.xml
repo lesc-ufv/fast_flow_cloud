@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="kmeans" targetName="kmeans_harp" />
+      <config projectName="kmeans" targetName="kmeans_ase" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_PREFIX_PATH=/media/lucas/3CF6B349F6B301E6/UFV/Projetos/Projetos-Pos-Graduacao/Doutorado/ready/installation" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8a5d316b-265e-4a9f-8734-88e66b2041c7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../cgra_runtime/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cgra_runtime/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cgra_runtime/src/cgra_exec.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cgra_runtime/src/cgra_exec.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../fdam" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../fdam" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/input_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kmeans.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/kmeans.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kmeans.h" beforeDir="false" afterPath="$PROJECT_DIR$/kmeans.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kmeans.json" beforeDir="false" afterPath="$PROJECT_DIR$/kmeans.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/output_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../sw/include/ready/scheduler.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../sw/include/ready/scheduler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../sw/include/ready/scheduler_defs.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../sw/include/ready/scheduler_defs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../sw/src/data_flow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../sw/src/data_flow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../sw/src/operator_factory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../sw/src/operator_factory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../sw/src/scheduler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../sw/src/scheduler.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="1fseZQ8mOE28wrpN6Jg4cZBgtJ7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="RunManager" selected="CMake Application.kmeans_ase">
+    <configuration name="kmeans_ase" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="4" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="kmeans" TARGET_NAME="kmeans_ase" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="kmeans" RUN_TARGET_NAME="kmeans_ase">
+      <envs>
+        <env name="ASE_WORKDIR" value="$PROJECT_DIR$/../../hw/sim/afu_sim/work" />
+      </envs>
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="kmeans_harp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="kmeans" TARGET_NAME="kmeans_harp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="kmeans" RUN_TARGET_NAME="kmeans_harp">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.kmeans_ase" />
+      <item itemvalue="CMake Application.kmeans_harp" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8a5d316b-265e-4a9f-8734-88e66b2041c7" name="Default Changelist" comment="" />
+      <created>1597011282457</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597011282457</updated>
+      <workItem from="1597011285003" duration="279000" />
+      <workItem from="1597025394747" duration="6805000" />
+      <workItem from="1597033384301" duration="7000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="312" y="79" width="732" height="644" key="#Inspections" timestamp="1597026225051">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="312" y="79" width="732" height="644" key="#Inspections/0.27.1366.741@0.27.1366.741" timestamp="1597026225051" />
+    <state x="108" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597029425348">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="108" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1366.741@0.27.1366.741" timestamp="1597029425348" />
+    <state width="449" height="478" key="DebuggerActiveHint" timestamp="1597031357624">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="449" height="478" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1597031357624" />
+    <state x="490" y="185" width="309" height="489" key="EnvironmentVariablesDialog" timestamp="1597027680769">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="490" y="185" width="309" height="489" key="EnvironmentVariablesDialog/0.27.1366.741@0.27.1366.741" timestamp="1597027680769" />
+    <state width="1320" height="33" key="GridCell.Tab.0.bottom" timestamp="1597032207191">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1597032207191" />
+    <state width="1320" height="33" key="GridCell.Tab.0.center" timestamp="1597032207189">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1597032207189" />
+    <state width="1320" height="33" key="GridCell.Tab.0.left" timestamp="1597032207188">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1597032207188" />
+    <state width="1320" height="33" key="GridCell.Tab.0.right" timestamp="1597032207190">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1597032207189" />
+    <state width="1320" height="33" key="GridCell.Tab.1.bottom" timestamp="1597032207194">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1597032207194" />
+    <state width="1320" height="33" key="GridCell.Tab.1.center" timestamp="1597032207193">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1597032207193" />
+    <state width="1320" height="33" key="GridCell.Tab.1.left" timestamp="1597032207192">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1597032207192" />
+    <state width="1320" height="33" key="GridCell.Tab.1.right" timestamp="1597032207193">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="33" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1597032207193" />
+    <state x="172" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1597011329397">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="172" y="31" width="1022" height="737" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1597011329397" />
+  </component>
+</project>

@@ -1,0 +1,11 @@
+digraph multadd{
+ 0 [ label = input0 ]
+ 1 [ label = input1 ]
+ 2 [ label = output2 ]
+ 3 [ label = multadd, VALUE = 3]
+ "3.3"[ label = 3 ]
+ 0 -> 3
+ 1 -> 3
+ "3.3" -> 3
+ 3 -> 2
+}

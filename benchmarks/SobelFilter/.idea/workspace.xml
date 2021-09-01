@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="sobel_filter" targetName="sobel_filter_harp" />
+      <config projectName="sobel_filter" targetName="sobel_filter_ase" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_PREFIX_PATH=/media/lucas/3CF6B349F6B301E6/UFV/Projetos/Projetos-Pos-Graduacao/Doutorado/ready/installation" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7ee8a3f7-7e77-4016-b806-e36538959260" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../fdam" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../fdam" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Paeth/paeth.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Paeth/paeth.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sobel.json" beforeDir="false" afterPath="$PROJECT_DIR$/sobel.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sobel_filter.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sobel_filter.h" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectId" id="1fudLVQs0nwUpkDol41Y0TVKRAj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="RunManager" selected="CMake Application.sobel_filter_ase">
+    <configuration name="sobel_filter_ase" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="4" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="sobel_filter" TARGET_NAME="sobel_filter_ase" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="sobel_filter" RUN_TARGET_NAME="sobel_filter_ase">
+      <envs>
+        <env name="ASE_WORKDIR" value="$PROJECT_DIR$/../../hw/sim/afu_sim/work" />
+      </envs>
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sobel_filter_harp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="sobel_filter" TARGET_NAME="sobel_filter_harp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="sobel_filter" RUN_TARGET_NAME="sobel_filter_harp">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.sobel_filter_ase" />
+      <item itemvalue="CMake Application.sobel_filter_harp" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ee8a3f7-7e77-4016-b806-e36538959260" name="Default Changelist" comment="" />
+      <created>1597071855249</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597071855249</updated>
+      <workItem from="1597071857538" duration="4086000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="141" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597072071364">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="141" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1366.741@0.27.1366.741" timestamp="1597072071364" />
+    <state width="465" height="478" key="DebuggerActiveHint" timestamp="1597075247672">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="465" height="478" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1597075247672" />
+    <state x="523" y="156" width="309" height="489" key="EnvironmentVariablesDialog" timestamp="1597072069950">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="523" y="156" width="309" height="489" key="EnvironmentVariablesDialog/0.27.1366.741@0.27.1366.741" timestamp="1597072069950" />
+    <state width="1320" height="159" key="GridCell.Tab.0.bottom" timestamp="1597075950569">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1597075950569" />
+    <state width="1320" height="159" key="GridCell.Tab.0.center" timestamp="1597075950568">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1597075950568" />
+    <state width="1320" height="159" key="GridCell.Tab.0.left" timestamp="1597075950568">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1597075950568" />
+    <state width="1320" height="159" key="GridCell.Tab.0.right" timestamp="1597075950569">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1597075950569" />
+    <state width="1320" height="159" key="GridCell.Tab.1.bottom" timestamp="1597075950573">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1597075950573" />
+    <state width="1320" height="159" key="GridCell.Tab.1.center" timestamp="1597075950571">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1597075950571" />
+    <state width="1320" height="159" key="GridCell.Tab.1.left" timestamp="1597075950570">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1597075950570" />
+    <state width="1320" height="159" key="GridCell.Tab.1.right" timestamp="1597075950572">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="159" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1597075950572" />
+    <state x="172" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1597071994386">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="172" y="31" width="1022" height="737" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1597071994386" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>185</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>187</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>190</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>209</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>224</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>228</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>232</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>237</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>249</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/scheduler.cpp</url>
+          <line>255</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
