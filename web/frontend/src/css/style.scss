@@ -1,0 +1,244 @@
+#cy {
+    position: absolute;
+    height: 85%;
+    /* z-index: 999; */
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+}
+
+.iopbox {
+    text-align: center;
+    // background: rgba(245, 245, 245,0.8);
+    // line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: rgb(33,37,41);
+    p {
+        margin: 0px;
+        line-height: 1;
+        &:first-child  {
+            border-bottom: 1px solid rgb(33,37,41);
+            width: 50px;
+            padding: 2px;
+        }
+
+        &:last-child {
+            padding: 4px;
+        }
+    }   
+    
+}
+
+
+.modal form {
+    & + form {
+        border-left: 1px solid #ced4da;
+    }   
+}
+
+// nav {
+//     font-family: "Ubuntu Mono", monospace;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+// }
+
+#console {
+    height: 100%;
+    margin: 0;
+    overflow-y: auto;
+    font-family: "Ubuntu Mono", monospace;
+}
+
+nav > span {
+    display: block;
+}
+
+#editor {
+    height: 100%;
+}
+
+#execute-cpp, #clear-console{
+    width: 100%;
+    border-radius: 0;
+}
+
+.fab{
+    position: fixed;
+    bottom:20px;
+    right:24px;
+}
+  
+.fab button{
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.4);
+    font-size: 24px;
+    color: white;
+    z-index: 20;
+    -webkit-transition: .2s ease-out;
+    -moz-transition: .2s ease-out;
+    transition: .2s ease-out;
+}
+
+.fab button:focus{
+    outline: none;
+}
+
+.fab button.run{
+    right: 15px;
+    bottom: 0px;
+    background-color: chartreuse;
+}
+
+.fab button.build{
+    right: 100px;
+    bottom: 0px;
+    background-color: slategray;
+}
+
+.fab button.build:active,
+.fab button.build:focus{
+    outline: none;
+    background-color: darkgray;
+    box-shadow: 0 3px 8px rgba(0,0,0,.5);
+}
+
+.fab button.run:active,
+.fab button.run:focus{
+    outline: none;
+    background-color: lightgreen;
+    box-shadow: 0 3px 8px rgba(0,0,0,.5);
+}
+
+label.label-run{
+    margin-bottom: 55px;
+    margin-right: 21px;
+    color: white;
+    font-weight: bold;
+    background-color: lightgreen;
+    border-radius: 3px;
+    padding: 5px 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+    opacity: 0;
+}
+
+label.label-build{
+    margin-bottom: 55px;
+    margin-right: 102px;
+    color: white;
+    font-weight: bold;
+    background-color: darkgray;
+    border-radius: 3px;
+    padding: 5px 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+    opacity: 0;
+}
+
+.fab1{
+    position: fixed;
+    bottom:230px;
+    right:30px;
+}
+  
+.fab1 button{
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.4);
+    font-size: 24px;
+    color: white;
+    z-index: 20;
+    -webkit-transition: .2s ease-out;
+    -moz-transition: .2s ease-out;
+    transition: .2s ease-out;
+}
+
+.fab1 button:focus{
+    outline: none;
+}
+
+.fab1 button.console-bt{
+    right: 15px;
+    bottom: 0px;
+    background-color: #343a40;
+}
+
+.fab1 button.console-bt:active,
+.fab1 button.gen-json-bt:active,
+.fab1 button.console-bt:focus,
+.fab1 button.gen-json-bt:focus{
+    outline: none;
+    background-color: darkgray;
+    box-shadow: 0 3px 8px rgba(0,0,0,.5);
+}
+
+label.label-console{
+    margin-bottom: 45px;
+    margin-right: -16px;
+    color: white;
+    font-weight: bold;
+    background-color: darkgray;
+    border-radius: 3px;
+    padding: 5px 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+    opacity: 0;
+}
+
+label.label-gen{
+    margin-bottom: 68px;
+    margin-right: -36px;
+    color: white;
+    font-weight: bold;
+    background-color: darkgray;
+    border-radius: 3px;
+    padding: 5px 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+    opacity: 0;
+}
+
+
+.fab1 button.gen-json-bt{
+    right: 100px;
+    bottom: 0px;
+    background-color: slategray;
+}
+
+.div-text{
+    // margin-top: 185px;
+    text-align: justify;
+    // font-style: italic;
+    font-family: sans-serif;
+    font-size: x-large;
+    // font-weight: bold;
+}
+
+.div-text-title{
+    margin-top: 125px;
+    text-align: center;
+    // font-style: italic;
+    font-family: sans-serif;
+    font-size: x-large;
+    // font-weight: bold;
+}
+
+#new_project{
+    font-weight: bold;
+}

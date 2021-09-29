@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Fernando Ferreira Passe">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>PLAIN - Project</title>
+  </head>
+
+  <body style="background-color: mintcream;">
+    <!-- "background-image": "./assets/img/input.svg" -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" style="font-weight: bold;" href="index.html">PLAIN</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <!-- <li class="nav-item active"></li> -->
+           <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Arquivo
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item disabled" href="#">Use arquivos em JSON</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" id="import" href="#">Importar</a>
+                <a class="dropdown-item" id="export" href="#">Exportar</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Simular
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item disabled" href="#">Selecione o tipo da simulação</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" id="sim_cpu" href="#">CPU</a>
+                <a class="dropdown-item" id="sim_cpu_sim" href="#">CPU com simulador</a>
+                <a class="dropdown-item" id="sim_cgra" href="#">CGRA</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Configurações
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item disabled" href="#">Configurações diversas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" id="cgra_conf" href="#">CGRA</a>
+            </div>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" id="adjust-layout" href="#">Centralize Graph</a>
+          </li> -->
+          <li class="nav-item" style="padding-left: 1210px;">
+            <a class="nav-link" id="help" href="#">Help</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Disabled</a>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
+    <div id="tabs">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" style="font-weight: bold;">
+          <a class="nav-link active" id="cplus-tab" data-toggle="tab" href="#cplus" role="tab" aria-controls="cplus" aria-selected="true">C++</a>
+        </li>
+        <li class="nav-item" style="font-weight: bold;">
+          <a class="nav-link" id="graph-tab" data-toggle="tab" href="#graph" role="tab" aria-controls="graph" aria-selected="false">Dataflow</a>
+        </li>
+        <!-- <li class="nav-item" style="font-weight: bold;" id="-1" data-toggle="tooltip" data-placement="top" title="New Dataflow">
+          <a class="nav-link" id="add-dfg" aria-selected="false"><i style="font-size: 1.1em; color: green;" class="fa fa-plus"></i></a>
+        </li> -->
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="cplus" role="tabpanel" aria-labelledby="cplus-tab">
+          <div style="height: 350px;">
+            <div id="editor"></div>
+          </div>
+          <div style="height: 209px;">
+            <pre id="console" class="border border-dark bg-light text-dark p-2">Welcome to the Console!<br />&raquo;  </pre>
+            <div class="fab1">
+              <label class="label-console" for="bt-console">Clear Console</label>
+              <button id="bt-console" class="console-bt">
+                <i style="font-size: 1.1em" class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="graph" role="tabpanel" aria-labelledby="graph-tab">
+          <div class="row justify-content-center">
+            <div class="fab1" style="position: absolute; bottom: 475px;">
+              <!-- <label class="label-gen" for="gen-json">Generate JSON</label>
+              <button id="export" class="gen-json-bt">
+                <i style="font-size: 1.1em" class="fa fa-spinner"></i>
+              </button> -->
+              <label class="label-console" for="adjust-layout">Adjust Graph</label>
+              <button id="adjust-layout" class="console-bt">
+                <i style="font-size: 1.1em" class="fa fa-arrows-alt"></i>
+              </button>
+            </div>
+            <div id="cy" class="col-12">
+            </div>
+          </div>
+        </div>
+        <div class="fab">
+          <label class="label-build" for="build">Build</label>
+          <button id="build" class="build">
+            <i style="font-size: 1.1em" class="fa fa-cogs"></i>
+          </button>
+        </div>
+        <div class="fab">
+          <label class="label-run" for="run">Run</label>
+          <button id="run" class="run" disabled>
+            <i style="font-size: 1.1em" class="fa fa-play"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="divDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" z-index="9999">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">New Dataflow</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button> -->
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" id="dfg-name" placeholder="Enter dataflow name">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="btn-close" data-dismiss="modal" style="visibility: hidden;">Close</button>
+            <button type="button" class="btn btn-primary" id="btn-save">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    $('#divDialog').modal({backdrop: 'static', keyboard: false});
+    // var previousLi = "#0";
+    // var previousDiv = "#cplus";
+    // function changeTab(newId, divId){
+    //   console.log("ALOOU");
+    //   $(previousLi + " a").removeClass("active");
+    //   $(previousLi + " a").prop("aria-selected", false);
+    //   $(previousDiv).removeClass("show");
+    //   $(previousDiv).removeClass("active");
+
+    //   console.log(previousLi);
+    //   console.log(newId);
+    //   $(newId + " a").addClass("active");
+    //   $(newId + " a").prop("aria-selected", true);
+    //   console.log(previousDiv);
+    //   console.log(divId);
+    //   $(divId).addClass("show");
+    //   $(divId).addClass("active");
+      
+    //   previousLi = newId;
+    //   previousDiv = divId;
+    // }
+  </script>
+</html>
