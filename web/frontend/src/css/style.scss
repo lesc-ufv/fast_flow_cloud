@@ -137,9 +137,9 @@ label.label-run{
     opacity: 0;
 }
 
-label.label-build{
+label.label-adjust{
     margin-bottom: 55px;
-    margin-right: 102px;
+    margin-right: 75px;
     color: white;
     font-weight: bold;
     background-color: darkgray;
@@ -188,18 +188,6 @@ label.label-build{
     outline: none;
     background-color: darkgray;
     box-shadow: 0 3px 8px rgba(0,0,0,.5);
-}
-
-label.label-console{
-    margin-bottom: 45px;
-    margin-right: -16px;
-    color: white;
-    font-weight: bold;
-    background-color: darkgray;
-    border-radius: 3px;
-    padding: 5px 5px;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
-    opacity: 0;
 }
 
 label.label-gen{

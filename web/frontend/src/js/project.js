@@ -168,7 +168,7 @@ function standardizeDfgJson(json) {
     return res;
 }
 
-$('#build').click((event) => {
+$('#run').click((event) => {
     event.preventDefault();
     var jsonDfg = exportModule(cy);
     var outputCode = editor.getValue();
@@ -177,13 +177,6 @@ $('#build').click((event) => {
     }else if(outputCode == ""){
         alert("Please, make a c++ code first!");
     }else{
-        $("#run").prop("disabled", false);
-        // const fileCpp = new Blob([outputCode], {type: 'text/x-c;charset=utf-8',});
-        // saveAs(fileCpp, 'main.cpp');
-        // console.log(parseURLParams(location.href));
-        // console.log(fileCpp);
-        // console.log(jsonDfg);
-        // console.log(outputCode);
         var finalJson = {
             "project_name": parseURLParams(location.href).project_name[0],
             "sources": {
@@ -229,23 +222,14 @@ $('#build').click((event) => {
     }
 });
 
-// $("#run").click(function(event){
-//     event.preventDefault();  
-// });
-
-$("#bt-console").click(function(event){
-    event.preventDefault();
-    $("#console").html("&raquo;  ");
-});
-
-$("#build").mouseover(function(event){
+$("#adjust-layout").mouseover(function(event){
    event.preventDefault();
-   $(".label-build").css("opacity", "1"); 
+   $(".label-adjust").css("opacity", "1"); 
 });
 
-$("#build").mouseleave(function(event){
+$("#adjust-layout").mouseleave(function(event){
     event.preventDefault();
-    $(".label-build").css("opacity", "0"); 
+    $(".label-adjust").css("opacity", "0"); 
 });
 
 $("#run").mouseover(function(event){
@@ -257,86 +241,3 @@ $("#run").mouseleave(function(event){
     event.preventDefault();
     $(".label-run").css("opacity", "0"); 
 });
-
-$("#bt-console").mouseover(function(event){
-    event.preventDefault();
-    $(".label-console").css("opacity", "1"); 
- });
- 
-$("#bt-console").mouseleave(function(event){
-    event.preventDefault();
-    $(".label-console").css("opacity", "0"); 
-});
-
-$("#adjust-layout").mouseover(function(event){
-    event.preventDefault();
-    $(".label-console").css("opacity", "1"); 
- });
- 
-$("#adjust-layout").mouseleave(function(event){
-    event.preventDefault();
-    $(".label-console").css("opacity", "0"); 
-});
-  
-// // Open jQuery Dialog to open modal popup - here we ask for tab name from user  
-// $("#add-dfg").click(function () {  
-//     $("#dfg-name").val("").focus();  
-//     $("#divDialog").modal();
-// });  
-  
-// // Adding new Tab on button click  
-// $("#addTabs").click(function () {  
-
-//     // Checking textbox is empty or not  
-//     if ($.trim($("#dfg-name").val()) == "") {  
-//         $("#dfg-name").val("").focus();  
-//     }  
-//     else {  
-
-//         // Checking tab name already exist or not  
-//         var tabNameExists = false;  
-//         $('#tabs ul li a').each(function (i) {  
-//             if ($.trim(this.text.toLowerCase()) == $.trim($("#dfg-name").val().toLowerCase())) {  
-//                 tabNameExists = true;  
-//             }  
-//         });  
-
-//         //code to insert new tab here if tab name does not exist  
-//         if (!tabNameExists) {  
-
-//             // Here we are getting max id so that we can assing new id to new tab  
-//             var maxid = 0;  
-//             $('#tabs ul li').each(function () {  
-//                 var value = parseInt($(this).attr('id'));  
-//                 maxid = (value > maxid) ? value : maxid;  
-//             });  
-
-//             var newid = maxid + 1;  
-
-//             // Adding new "<li>" with anchor tag  
-//             var add = $("#-1");
-//             $("-1").remove();
-//             $("#tabs ul").append(  
-//                 '<li class="nav-item" style="font-weight: bold;" id="' + newid + '" onclick="changeTab(\'#' + newid + '\', \'#dfg-' + newid + '\');"><a class="nav-link" id="dfg-tab-' + newid + '" href="#dfg-' + newid + '" role="tab" aria-controls="dfg-' + newid + '" aria-selected="false">' + $("#divDialog input").val() + '</a></li>'
-//             );  
-//             $("#tabs ul").append(add);
-//             // Adding Div for content for the above "li" tag  
-//             $("#myTabContent").append(  
-//                 "<div class='tab-pane fade' id='dfg-" + newid + "' role='tabpanel' aria-labelledby='dfg-tab-" + newid + "'><div class=\"row justify-content-center\"><div class=\"fab1\" style=\"position: absolute;\"><label class=\"label-gen\" for=\"gen-json\">Generate JSON</label><button id=\"export\" class=\"gen-json-bt\"><i style=\"font-size: 1.1em\" class=\"fa fa-spinner\"></i></button><label class=\"label-console\" for=\"adjust-layout\">Adjust Graph</label><button id=\"adjust-layout\" class=\"console-bt\"><i style=\"font-size: 1.1em\" class=\"fa fa-arrows-alt\"></i></button></div><div id=\"cy\" class=\"col-12\"></div></div></div>"  
-//             );  
-//             $("#btn-close").click();
-//             // Refreshing the tab as we have just added new tab  
-//             // $("#tabs").tabs("refresh");  
-//             // Make added tab active  
-//             // $("#tabs").find('li a[href="#dfg-' + newid + '"]').trigger("click");  
-
-//             // $("#divDialog").dialog("close");  
-//         }  
-//         else {  
-//             // Showing message if tab name already exist  
-//             alert("Sorry! Tab name already exist");  
-//             $("#divDialog input").focus();  
-//         }  
-//     }  
-// });  
- 
