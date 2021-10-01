@@ -1,7 +1,27 @@
+.div-editor{
+    height: 85%;
+    width: 100%;
+    position: absolute;
+}
+
 #cy {
     position: absolute;
     height: 85%;
     /* z-index: 999; */
+}
+
+@media screen and (max-width: 1280px) {
+    .div-editor{
+        height: 83%;
+        width: 100%;
+        position: absolute;
+    }
+    
+    #cy {
+        position: absolute;
+        height: 83%;
+        /* z-index: 999; */
+    }
 }
 
 .footer {
@@ -229,4 +249,18 @@ label.label-gen{
 
 #new_project{
     font-weight: bold;
+}
+
+.div-github{
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+#github{
+    color: gray;
+}
+
+#github:hover{
+    color: #ced4da;
 }
