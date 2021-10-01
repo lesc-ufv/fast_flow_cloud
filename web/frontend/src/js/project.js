@@ -206,6 +206,8 @@ $('#run').click((event) => {
             dataType: 'json',
 
             success: function(result){
+                $("#log").val(result.resposta);
+                $('#modal-result').modal({backdrop: 'static', keyboard: false});
                 console.log(result);
             },
             fail: function(msg){

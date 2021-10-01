@@ -74,6 +74,24 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="modal-result" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" z-index="9999">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Execution Log</h5>
+          </div>
+          <div class="modal-body">
+            <textarea name="log" id="log" cols="60" rows="20" readonly>
+
+            </textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script>
     $('#divDialog').modal({backdrop: 'static', keyboard: false});
