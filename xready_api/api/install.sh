@@ -3,7 +3,7 @@
 set -e
 
 echo '----------------------------------------------------------------------------'
-echo 'Welcome to Fast Flow Cloud API Setup Wizard.'
+echo 'Welcome to Fast Flow Cloud API installation.'
 echo ''
 echo '----------------------------------------------------------------------------'
 
@@ -63,32 +63,19 @@ cd $INSTALL_DIR
 INSTALL_DIR=`pwd`
 cd $CALLPATH
 
-check_lib() {
-  LIB_FILE=$1.'so'
-  CHECK=$(ldconfig -p | grep ${LIB_FILE})
-
-  if [[ ${CHECK} != *${LIB_FILE}* ]]
-  then
-    tput setaf 1; echo 'Error: '${LIB_FILE}' is not installed!'
-    exit 1
-  fi
-}
-
-
 echo "cleaning up..."
-echo ""
-rm -rf $FFC_ROOT/opae-sdk/mybuild
+rm -rf $FFC_ROOT/api/lib/build
 echo "end of cleaning up!"
 echo ""
-
-echo "installing FFC..."
-echo ""
-
+echo "compiling FFC..."
+cd $FFC_ROOT/api/lib
 make $JOBS
+echo "end of compiling FFC"
+echo ""
+echo "installing FFC..."
 $SUDO make install
 echo "end of installing FFC"
 echo ""
-
 echo "Installation completed successfully!"
 echo ""
 

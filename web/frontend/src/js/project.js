@@ -10,12 +10,13 @@ import importModule from './modules/import';
 import contextMenusModule from './modules/contextMenus';
 import copyModule from './modules/copy';
 import { saveAs } from 'file-saver';
+
 import 'brace';
 import 'brace/mode/c_cpp';
 import 'brace/theme/dawn';
 
 // initialize the content of the text editor to some C++
-$("#editor").text(`#include <iostream>\n\nusing namespace std;\n\nint main(){\n\tcout << "Hello World!" << endl;\n\treturn 0;\n}`);
+$("#editor").text(`#include <iostream>\n#include <xready>\n\nusing namespace std;\n/*\nUse the function below to run your dataflow:\nint run_dataflow(\n<execution type>,\n<datflow name>,\n<array of inputs array>,\n<array of inputs size>,\n<array of output array>,\n<array of output size>,\n<array of constants>,\nnumber_of_constants\n);\n*/\nint main(){\n\tcout << "Hello Fast Flow Cloud!" << endl;\n\treturn 0;\n}`);
     
 // initialize the editor environment using the ace library
 var editor = ace.edit("editor");
@@ -182,7 +183,7 @@ $('#run').click((event) => {
             "sources": {
                 "main.cpp": outputCode
             },
-            "compile_flags": ["-std=c++11", "-fopenmp"],
+            "compile_flags": ["-std=c++11", "-fopenmp","-lxready"],
             "dataflows": [standardizeDfgJson(jsonDfg)],
             "cgra_arch": {
                 "id": 0,
@@ -206,7 +207,7 @@ $('#run').click((event) => {
             dataType: 'json',
 
             success: function(result){
-                $("#log").val(result.resposta);
+                $("#log").val(result.response);
                 $('#modal-result').modal({backdrop: 'static', keyboard: false});
                 console.log(result);
             },
