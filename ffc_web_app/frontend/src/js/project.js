@@ -256,7 +256,7 @@ $('#run').click((event) => {
             "compile_flags": ["-std=c++11", "-fopenmp","-lxready"],
             "dataflows": [standardizeDfgJson(jsonDfg)],
             "cgra_name": "cgra_128_8_8_16",
-            "run_mode":"cpu"
+            "run_mode":"cpu"// | sim | cgra
         }
         $.ajax({ 
             type: "GET",
