@@ -239,6 +239,11 @@ function standardizeDfgJson(json) {
     return res;
 }
 
+$("#settings").click((event) => {
+    event.preventDefault();
+    $('#modal-settings').modal({backdrop: 'static', keyboard: false});
+});
+
 $('#run').click((event) => {
     event.preventDefault();
     var jsonDfg = exportModule(cy);
@@ -248,6 +253,9 @@ $('#run').click((event) => {
     }else if(outputCode == ""){
         alert("Please, make a C++ code first!");
     }else{
+        $("#run").prop("disabled", true);
+        $("#icon-run").removeClass("fa fa-play");
+        $("#icon-run").addClass("fa fa-spinner fa-spin fa-3x fa-fw");
         var finalJson = {
             "project_name": parseURLParams(location.href).project_name[0],
             "sources": {
@@ -256,7 +264,7 @@ $('#run').click((event) => {
             "compile_flags": ["-std=c++11", "-fopenmp","-lxready"],
             "dataflows": [standardizeDfgJson(jsonDfg)],
             "cgra_name": "cgra_128_8_8_16",
-            "run_mode":"cpu"// | sim | cgra
+            "run_mode": $("input[name=type_run]:checked").val()
         }
         $.ajax({ 
             type: "GET",
@@ -268,6 +276,9 @@ $('#run').click((event) => {
             success: function(result){
                 $("#log").val(result.response);
                 $('#modal-result').modal({backdrop: 'static', keyboard: false});
+                $("#run").prop("disabled", false);
+                $("#icon-run").removeClass("fa fa-spinner fa-spin fa-3x fa-fw");
+                $("#icon-run").addClass("fa fa-play");
             },
             fail: function(msg){
                 console.log("ERRO 1");
@@ -302,3 +313,13 @@ $("#run").mouseleave(function(event){
     event.preventDefault();
     $(".label-run").css("opacity", "0"); 
 });
+
+$("#settings").mouseover(function(event){
+    event.preventDefault();
+    $(".label-settings").css("opacity", "1"); 
+ });
+ 
+ $("#settings").mouseleave(function(event){
+     event.preventDefault();
+     $(".label-settings").css("opacity", "0"); 
+ });

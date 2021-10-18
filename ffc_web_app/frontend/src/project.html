@@ -34,6 +34,12 @@
         <div class="tab-pane fade show active" id="cplus" role="tabpanel" aria-labelledby="cplus-tab">
           <div class="div-editor">
             <div id="editor"></div>
+            <div class="fab">
+              <label class="label-settings" for="settings">Settings</label>
+              <button id="settings" class="build">
+                <i style="font-size: 1.1em" class="fa fa-cogs"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div class="tab-pane fade" id="graph" role="tabpanel" aria-labelledby="graph-tab">
@@ -82,6 +88,35 @@
           </div>
           <div class="modal-body">
             <textarea name="log" id="log" cols="47" rows="10" readonly></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" z-index="9999">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Settings</h5>
+          </div>
+          <div class="modal-body">
+            <input type="radio" name="type_run" id="run_cpu" value="cpu" checked="checked">
+            <label for="run_cpu">
+                Run CPU
+            </label>
+            <br></br>
+            <input type="radio" name="type_run" id="run_sim" value="sim">
+            <label for="run_sim">
+                Run Simulator CGRA
+            </label>
+            <br></br>
+            <input type="radio" name="type_run" id="run_cgra" value="cgra">
+            <label for="run_cgra">
+                Run Real CGRA
+            </label>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
