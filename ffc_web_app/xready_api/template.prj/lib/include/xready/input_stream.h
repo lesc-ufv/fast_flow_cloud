@@ -12,10 +12,10 @@ class InputStream : public Operator {
 private:
     int index;
     short *data;
-    int size;
+    long size;
 
 public:
-    explicit InputStream(int id, short *data, int size) : Operator(id, OP_PASS_A, OP_IN, "input"),
+    explicit InputStream(int id, short *data, long size) : Operator(id, OP_PASS_A, OP_IN, "input"),
                                                         index(0), data(data),
                                                         size(size) {}
 
@@ -23,7 +23,7 @@ public:
         return new InputStream(params.id, params.data, params.size);
     }
 
-    void setData(short *data, int size) {
+    void setData(short *data, long size) {
         InputStream::data = data;
         InputStream::size = size;
     }
@@ -46,6 +46,7 @@ public:
     }
 
     void compute() override {
+
         if (data) {
             if (InputStream::index < InputStream::size) {
                 auto v = InputStream::data[InputStream::index++];

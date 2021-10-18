@@ -1,5 +1,5 @@
-#ifndef CGRASCHEDULER_DATAFLOW_H
-#define CGRASCHEDULER_DATAFLOW_H
+#ifndef DATAFLOW_H
+#define DATAFLOW_H
 
 #include <queue>
 #include <map>
@@ -14,7 +14,9 @@
 #include <xready/operator.h>
 #include <xready/operator_factory.h>
 #include <xready/params.h>
-
+#include <xready/input_stream.h>
+#include <xready/output_stream.h>
+#include <xready/ffc_args.h>
 
 class DataFlow {
 
@@ -34,7 +36,9 @@ private:
 
 public:
 
-    explicit DataFlow(int id, std::string name);
+    DataFlow(int id, std::string name);
+
+    DataFlow(std::string json_name);
 
     ~DataFlow();
 
@@ -80,10 +84,19 @@ public:
 
     Operator *getCOp(int c_id);
 
-    Operator *getInOp(int in_id);
+    InputStream *getInOp(int in_id);
 
-    Operator *getOutOp(int out_id);
+    OutputStream *getOutOp(int out_id);
+
+    void setInputData(int id, short * data, long size);
+
+    void setOutputData(int id, short * data, long size);
+
+    void setConstants(short * constants, int size);
+
+    void run();
+
 };
 
 
-#endif //CGRASCHEDULER_DATAFLOW_H
+#endif //DATAFLOW_H

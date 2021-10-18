@@ -12,8 +12,11 @@ import styles from '../assets/json/styles.json';
 cytoscape.use(contextMenus, $);
 cytoscape.use(clipboard, $);
 cytoscape.use(edgehandles);
+
 undoRedo(cytoscape);
+
 cytoscape.use(dagre);
+
 nodeHtmlLabel(cytoscape);
 
 const initconfig = {

@@ -156,7 +156,7 @@ function standardizeDfgJson(json) {
     var contEdges = 0;
     var consts = {};
     for (let index = 0; index < json.length; index++) {
-        if(json[index].group == 'nodes' && json[index].data.type != 'const'){
+        if(json[index].group == 'nodes' && json[index].data.type != 'const' && json[index].data.type){
             if(json[index].data.type == 'input'){
             nodes.push({
                 "id": contNodes,
@@ -179,7 +179,7 @@ function standardizeDfgJson(json) {
                 "old_id": json[index].data.id,
                 "label": json[index].data.type,
                 "opcode": json[index].data.type,
-                "id_const": -1,
+                "const_id": -1,
             });
             }
             contNodes++;
@@ -218,7 +218,7 @@ function standardizeDfgJson(json) {
     for(var c in consts){
         for (let index = 0; index < nodes.length; index++){
             if(c == nodes[index].old_id){
-                nodes[index].id_const = consts[c].cid;
+                nodes[index].const_id = consts[c].cid;
             }
         }
     }
@@ -227,7 +227,7 @@ function standardizeDfgJson(json) {
             "id": nodes[index].id,
             "label": nodes[index].label,
             "opcode": nodes[index].opcode,
-            "const_id": nodes[index].id_const,
+            "const_id": nodes[index].const_id,
         }
         if(n.label == 'input'){
             n['in_id'] = nodes[index].in_id;

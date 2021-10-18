@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int ffc_run_dataflow(
+int ffc_dataflow_exec(
     int argc,
     char *argv[],
     void ** inputs,
@@ -15,6 +15,7 @@ int ffc_run_dataflow(
     void *constants,
     int number_of_const
 );
+
 void run_dataflow_cpu(
     DataFlow *df,
     void ** inputs,

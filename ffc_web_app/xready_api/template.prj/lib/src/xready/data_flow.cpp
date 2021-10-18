@@ -8,16 +8,20 @@ DataFlow::DataFlow(int id, std::string name) :
         num_op(0),
         num_level(0) {}
 
-DataFlow::~DataFlow() {
-    for(auto op:op_array){
-        delete op.second;
-    }
-    DataFlow::op_array.clear();
-    for (auto g:DataFlow::graph) {
-        g.second.clear();
-    }
-    DataFlow::graph.clear();
+
+DataFlow::DataFlow(std::string json_name) :
+        id(0),
+        name(std::move(name)),
+        num_op_in(0),
+        num_op_out(0),
+        num_op(0),
+        num_level(0) {
+
+    std::string json_path = json_name + ".json";
+    DataFlow::fromJSON(json_path);
 }
+
+DataFlow::~DataFlow() { }
 
 void DataFlow::addOperator(Operator *op) {
     if (op->getDataFlowId() == -1) {
@@ -46,8 +50,9 @@ void DataFlow::compute() {
 
     auto n = DataFlow::getNumLevel();
     int allIsEnd = 0;
-    
-    while (allIsEnd != DataFlow::getNumOpIn()) {
+    int num_in = DataFlow::getNumOpIn();
+
+    while (allIsEnd != num_in) {
         allIsEnd = 0;
         for (int i = 0; i <= n; ++i) {
             for (auto item:DataFlow::getOpArray()) {
@@ -59,7 +64,7 @@ void DataFlow::compute() {
                     }
                 }
             }
-            if (allIsEnd == DataFlow::getNumOpIn()) {
+            if (allIsEnd == num_in) {
                 break;
             }
         }
@@ -211,7 +216,7 @@ void DataFlow::fromJSON(const std::string &fileNamePath) {
         }else if(opcode == "output"){
             op->setOutId(e["out_id"].asInt());
         }else{
-            op->setCId(e["id_const"].asInt());
+            op->setCId(e["const_id"].asInt());
         }
         DataFlow::addOperator(op);
     }
@@ -340,20 +345,51 @@ Operator *DataFlow::getCOp(int c_id){
     return nullptr;
 }
 
-Operator *DataFlow::getInOp(int in_id){
+InputStream *DataFlow::getInOp(int in_id){
     for (auto op:DataFlow::op_array) {
             if (op.second->getInId() == in_id) {
-            return op.second;
+            return reinterpret_cast<InputStream*>(op.second);
         }
     }
     return nullptr;
 }
 
-Operator *DataFlow::getOutOp(int out_id){
+OutputStream *DataFlow::getOutOp(int out_id){
     for (auto op:DataFlow::op_array) {
         if (op.second->getOutId() == out_id) {
-            return op.second;
+            return reinterpret_cast<OutputStream*>(op.second);
         }
     }
     return nullptr;
+}
+
+void DataFlow::setInputData(int id, short * data, long size){
+    auto op = DataFlow::getInOp(id);
+    op->setData(data,size);
+}
+
+void DataFlow::setOutputData(int id, short * data, long size){
+    auto op = DataFlow::getOutOp(id);
+    op->setData(data,size);
+}
+
+void DataFlow::setConstants(short * constants, int size){
+    for(int i=0; i < size;i++)
+        DataFlow::getCOp(i)->setConst(constants[i]);
+}
+
+void DataFlow::run(){
+
+    int argc = FFC::getInstance()->getArgc();
+    char **argv = FFC::getInstance()->getArgv();
+
+    std::string exec_type = "cpu";
+
+    if(argc > 1){
+        exec_type = argv[1];
+    }
+
+    if(exec_type == "cpu"){
+        DataFlow::compute();
+    }
 }

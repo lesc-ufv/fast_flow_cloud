@@ -1,6 +1,6 @@
 #include<xready/ffc_api_functions.h>
 
-int ffc_run_dataflow(
+int ffc_dataflow_exec(
     int argc,
     char *argv[],
     std::string dataflow,

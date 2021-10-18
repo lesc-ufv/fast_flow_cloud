@@ -10,9 +10,9 @@ class OutputStream : public Operator {
 private:
     int index;
     short *data;
-    int size;
+    long size;
 public:
-    explicit OutputStream(int id, short *data, int size) : Operator(id, OP_PASS_A, OP_OUT, "output"),
+    explicit OutputStream(int id, short *data, long size) : Operator(id, OP_PASS_A, OP_OUT, "output"),
                                                          index(0),
                                                          data(data),
                                                          size(size) {}
@@ -21,7 +21,7 @@ public:
         return new OutputStream(params.id, params.data, params.size);
     }
 
-    void setData(short *data, int size) {
+    void setData(short *data, long size) {
         OutputStream::data = data;
         OutputStream::size = size;
     }

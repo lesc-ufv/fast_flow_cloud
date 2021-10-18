@@ -57,7 +57,7 @@
         <div class="fab">
           <label class="label-run" for="run">Run</label>
           <button id="run" class="run">
-            <i style="font-size: 1.1em" class="fa fa-play"></i>
+            <i id="icon-run" style="font-size: 1.1em" class="fa fa-play"></i>
           </button>
         </div>
       </div>
@@ -105,17 +105,17 @@
           <div class="modal-body">
             <input type="radio" name="type_run" id="run_cpu" value="cpu" checked="checked">
             <label for="run_cpu">
-                Run CPU
+                Simulate on CPU
             </label>
             <br></br>
             <input type="radio" name="type_run" id="run_sim" value="sim">
             <label for="run_sim">
-                Run Simulator CGRA
+                Simulate on Overlay CGRA
             </label>
             <br></br>
             <input type="radio" name="type_run" id="run_cgra" value="cgra">
             <label for="run_cgra">
-                Run Real CGRA
+                Execute on Overlay CGRA in AWS F1
             </label>
           </div>
           <div class="modal-footer">

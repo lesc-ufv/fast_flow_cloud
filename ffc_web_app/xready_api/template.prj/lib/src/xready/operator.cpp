@@ -2,9 +2,9 @@
 
 Operator::Operator(int id, int op_code, int type, std::string label) :
         id(id),
-        c_id(0),
-        in_id(0),
-        out_id(0),
+        c_id(-1),
+        in_id(-1),
+        out_id(-1),
         level(0),
         opCode(op_code),
         type(type),
@@ -22,6 +22,9 @@ Operator::Operator(int id, int op_code, int type, std::string label) :
 
 Operator::Operator(int id, int op_code, int type, std::string label, short constant) :
         id(id),
+        c_id(-1),
+        in_id(-1),
+        out_id(-1),
         level(0),
         opCode(op_code),
         type(type),
