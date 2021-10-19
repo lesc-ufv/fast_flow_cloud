@@ -36,18 +36,18 @@ cpu: host
 
 .PHONY: sim	
 sim: host simconf emconfig
-	@XCL_EMULATION_MODE=$(TARGET) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "sim" $(SIM_XLCBIN) $(KERNEL_NAME) cgra_arch.json
+	@XCL_EMULATION_MODE=$(TARGET) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "sim" $(KERNEL_NAME) $(SIM_XLCBIN)  cgra_arch.json
 
 .PHONY: cgra
 cgra: host
-	@LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "cgra" $(SIM_XLCBIN) $(KERNEL_NAME)  cgra_arch.json
+	@LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "cgra" $(KERNEL_NAME) $(HW_XLCBIN) cgra_arch.json
 
 .PHONY:emconfig
 emconfig: emconfig.json
 
 emconfig.json:
 	@mkdir -p $(EMCONFIG_DIR)
-	@emconfigutil --platform $(DEVICE) --od $(EMCONFIG_DIR)
+	@emconfigutil --platform $(DEVICE) --od $(EMCONFIG_DIR) > /dev/null
 	@cp $(EMCONFIG_DIR)/emconfig.json .
 
 .PHONY: clean	

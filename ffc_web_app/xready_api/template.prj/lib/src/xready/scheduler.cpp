@@ -7,11 +7,9 @@ Scheduler::Scheduler(CgraArch *cgra) : cgraArch(cgra) {
     }
 }
 
-Scheduler::~Scheduler() {
-    Scheduler::dataflows.clear();
-}
+Scheduler::~Scheduler() { }
 
-bool Scheduler::addDataFlow(DataFlow *df, int threadID, int groupID) {
+bool Scheduler::addDataFlow(DDataFlow *df, int threadID, int groupID) {
     if (Scheduler::cgraArch) {
         if (threadID >= 0 && threadID <= (Scheduler::cgraArch->getNumThreads() - 1)) {
             Scheduler::dataflows[threadID] = df;
@@ -44,13 +42,13 @@ int Scheduler::scheduling() {
 
 int Scheduler::mapAndRoute(int threadID) {
 
-    if (dataflows[threadID]->getNumOp() > cgraArch->getNumPe()) {
+    if (dataflows[threadID]->getNumNodes() > cgraArch->getNumPe()) {
         return SCHEDULER_INSUFFICIENT_PE;
     }
-    if (dataflows[threadID]->getNumOpIn() > cgraArch->getNumPeIn()) {
+    if (dataflows[threadID]->getNumInputs() > cgraArch->getNumPeIn()) {
         return SCHEDULER_INSUFFICIENT_PE_IN;
     }
-    if (dataflows[threadID]->getNumOpOut() > cgraArch->getNumPeOut()) {
+    if (dataflows[threadID]->getNumOutputs() > cgraArch->getNumPeOut()) {
         return SCHEDULER_INSUFFICIENT_PE_OUT;
     }
     auto operators = dataflows[threadID]->getOpArray();
@@ -123,11 +121,7 @@ int Scheduler::mapAndRoute(int threadID) {
         pe_swap = Scheduler::placeAndRoute(solution, threadID);
         if (pe_swap == -1) {
             Scheduler::data_flow_mapping[group] = solution;
-            for(auto s : solution){
-	       std::cout << s << ", ";
-            }
-	    std::cout << std::endl;
-	    return SCHEDULE_SUCCESS;
+            return SCHEDULE_SUCCESS;
         }
         int swap = -1;
         if (pe_swap < cgraArch->getNumPeIn()) {

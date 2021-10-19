@@ -1,395 +1,127 @@
 #include <xready/data_flow.h>
 
-DataFlow::DataFlow(int id, std::string name) :
-        id(id),
-        name(std::move(name)),
-        num_op_in(0),
-        num_op_out(0),
-        num_op(0),
-        num_level(0) {}
+DataFlow::DataFlow(std::string json_name): name(std::move(json_name)){
 
+    int argc = FFC::getInstance()->getArgc();
+    char **argv = FFC::getInstance()->getArgv();
 
-DataFlow::DataFlow(std::string json_name) :
-        id(0),
-        name(std::move(name)),
-        num_op_in(0),
-        num_op_out(0),
-        num_op(0),
-        num_level(0) {
+    DataFlow::exec_type = "cpu";
+    std::string json_path = name + ".json";
 
-    std::string json_path = json_name + ".json";
-    DataFlow::fromJSON(json_path);
-}
-
-DataFlow::~DataFlow() { }
-
-void DataFlow::addOperator(Operator *op) {
-    if (op->getDataFlowId() == -1) {
-        op->setDataFlowId(DataFlow::id);
-        DataFlow::op_array[op->getId()] = op;
-        DataFlow::num_op++;
-        if (op->getType() == OP_IN) {
-            DataFlow::num_op_in++;
-            DataFlow::input_op_ids.push_back(op->getId());
-        }
-        if (op->getType() == OP_OUT) {
-            DataFlow::num_op_out++;
-            DataFlow::output_op_ids.push_back(op->getId());
-        }
-    }
-}
-
-Operator *DataFlow::removeOperator(int op_id) {
-    Operator *r = DataFlow::op_array[op_id];
-    DataFlow::op_array.erase(op_id);
-    r->setDataFlowId(-1);
-    return r;
-}
-
-void DataFlow::compute() {
-
-    auto n = DataFlow::getNumLevel();
-    int allIsEnd = 0;
-    int num_in = DataFlow::getNumOpIn();
-
-    while (allIsEnd != num_in) {
-        allIsEnd = 0;
-        for (int i = 0; i <= n; ++i) {
-            for (auto item:DataFlow::getOpArray()) {
-                auto op = item.second;
-                if (op->getLevel() == i) {
-                    op->compute();
-                    if (op->getType() == OP_IN && op->getIsEnd()) {
-                        allIsEnd++;
-                    }
-                }
-            }
-            if (allIsEnd == num_in) {
-                break;
-            }
-        }
-    }
-}
-
-const std::map<int, Operator *> &DataFlow::getOpArray() const {
-    return op_array;
-}
-
-Operator *DataFlow::getOp(int id) {
-    if (DataFlow::op_array.find(id) != DataFlow::op_array.end()) {
-        return DataFlow::op_array[id];
-    }
-    return nullptr;
-}
-
-void DataFlow::toDOT(std::string fileNamePath) {
-    std::ofstream myfile;
-    myfile.open(fileNamePath);
-    myfile << "digraph " << DataFlow::name << "{" << std::endl;
-    for (auto op:DataFlow::op_array) {
-
-        if (op.second->getType() == OP_IN) {
-            myfile << " " << op.first << " [ label = input" << op.second->getId() << " ]" << std::endl;
-        } else if (op.second->getType() == OP_OUT) {
-            myfile << " " << op.first << " [ label = output" << op.second->getId() << " ]" << std::endl;
-        } else if (op.second->getType() == OP_IMMEDIATE) {
-            myfile << " " << op.first;
-            myfile << " [ label = " << op_label[op.second->getOpCode()] << "i";
-            myfile << ", VALUE = " << op.second->getConst();
-            myfile << "]" << std::endl;
-            myfile << " \"" << op.first << "." << op.second->getConst() << "\"[ label = " << op.second->getConst()
-                   << " ]" << std::endl;
-
-        } else {
-            myfile << " " << op.first << " [ label = " << op_label[op.second->getOpCode()] << "]" << std::endl;
-        }
-
-    }
-    for (auto op:DataFlow::op_array) {
-        if (op.second->getType() == OP_IMMEDIATE) {
-            myfile << " \"" << op.first << "." << op.second->getConst() << "\" -> " << op.first << std::endl;
-        }
-        for (auto op_dst:op.second->getDst()) {
-            myfile << " " << op.first << " -> " << op_dst->getId() << std::endl;
-        }
-    }
-    myfile << "}" << std::endl;
-    myfile.close();
-}
-
-void DataFlow::toJSON(const std::string &fileNamePath) {
-    std::ofstream myfile;
-    myfile.open(fileNamePath);
-    myfile << "[" << std::endl;
-
-    char str_node[] = R"({"data":{"id":%d,"type":"%s","value":%d},"group":"nodes"})";
-    char str_edge[] = R"({"data":{"id":%d,"source":%d,"target":%d, "port":%d},"group":"edges"})";
-
-    char buf[256];
-    int numEdge = DataFlow::getNumEdges();
-    int cnt = 0;
-    int max_id = 0;
-    int id_edges = 0;
-    for (auto item:DataFlow::op_array) {
-        cnt++;
-        auto op = item.second;
-        sprintf(buf, str_node, op->getId(), op->getLabel().c_str(), op->getConst());
-        if (op->getId() > max_id) {
-            max_id = op->getId();
-        }
-        myfile << buf << "," << std::endl;
-    }
-    id_edges = max_id + 1;
-    cnt = 0;
-    int port;         //src,dst,port
-    std::map<std::tuple<int,int,int>,bool> map_port;
-
-    for (auto item:DataFlow::op_array) {
-        auto op = item.second;
-        for (auto neighbor:op->getDst()) {
-            cnt++;
-            port = -1;
-            if(neighbor->getSrcA()) {
-                if (neighbor->getSrcA()->getId() == op->getId()) {
-                    auto key = std::tuple<int,int,int>(op->getId(),neighbor->getId(),0);
-                    if(map_port.find(key) == map_port.end()){
-                        port = 0;
-                        map_port[key] = true;
-                    }
-                }
-            }
-            if(neighbor->getSrcB() && port == -1) {
-                if (neighbor->getSrcB()->getId() == op->getId()) {
-                    auto key = std::tuple<int,int,int>(op->getId(),neighbor->getId(),1);
-                    if(map_port.find(key) == map_port.end()){
-                        port = 1;
-                        map_port[key] = true;
-                    }
-                }
-            }
-            if(neighbor->getBranchIn()) {
-                if (neighbor->getBranchIn()->getId() == op->getId()) {
-                    port = 2;
-                }
-            }
-            sprintf(buf, str_edge, id_edges++, op->getId(), neighbor->getId(), port);
-            if (cnt < numEdge)
-                myfile << buf << "," << std::endl;
-            else
-                myfile << buf << std::endl;
-        }
-    }
-    myfile << "]";
-    myfile.close();
-}
-
-void DataFlow::fromJSON(const std::string &fileNamePath) {
-    Json::Value df;
-    Json::Value map_op;
-
-    const auto str_map_op_length = static_cast<int>(str_map_op.length());
-
-    std::ifstream ifs;
-    ifs.open(fileNamePath);
-
-    Json::CharReaderBuilder builder;
-    JSONCPP_STRING errs;
-
-    if (!parseFromStream(builder, ifs, &df, &errs)) {
-        std::cout << errs << std::endl;
-        return;
-    }
-    ifs.close();
-    const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
-    if (!reader->parse(str_map_op.c_str(), str_map_op.c_str() + str_map_op_length, &map_op, &errs)) {
-        std::cout << errs << std::endl;
-        return;
+    if(argc > 1){
+        DataFlow::exec_type = argv[1];
     }
 
-    for (auto e:df["nodes"]) {
-        int id = e["id"].asInt();
-        std::string opcode = e["opcode"].asString();
-        auto params = Params(id, 0, nullptr, 0);
-        auto op = OperatorFactory::Get()->CreateOperator(opcode, params);
-        if(opcode == "input"){
-            op->setInId(e["in_id"].asInt());
-        }else if(opcode == "output"){
-            op->setOutId(e["out_id"].asInt());
-        }else{
-            op->setCId(e["const_id"].asInt());
-        }
-        DataFlow::addOperator(op);
-    }
-    for (auto e:df["edges"]) {
-        auto src = e["source"].asInt();
-        auto dst = e["target"].asInt();
-        auto port = e["port"].asInt();
-        auto op_src = DataFlow::op_array[src];
-        auto op_dst = DataFlow::op_array[dst];
-        DataFlow::connect(op_src, op_dst, port);
-    }
+    DataFlow::df = new DDataFlow(0,DataFlow::name);
+    DataFlow::df->fromJSON(json_path);
 }
 
-void DataFlow::connect(Operator *src, Operator *dst, int dstPort) {
-
-    DataFlow::addOperator(src);
-    DataFlow::addOperator(dst);
-    DataFlow::graph[src->getId()].push_back(dst->getId());
-
-    src->getDst().push_back(dst);
-
-    if (dstPort == PORT_A) {
-        dst->setSrcA(src);
-    } else if (dstPort == PORT_B) {
-        dst->setSrcB(src);
-    } else if (dstPort == PORT_BRANCH) {
-        dst->setBranchIn(src);
-    }
-    DataFlow::updateOpLevel();
-}
-
-void DataFlow::updateOpLevel() {
-    std::queue<int> q;
-    int parent;
-    for (auto op:DataFlow::op_array) {
-        if (op.second->getType() == OP_IN) {
-            q.push(op.first);
-            while (!q.empty()) {
-                parent = q.front();
-                q.pop();
-                for (auto child:DataFlow::graph[parent]) {
-                    int lp = DataFlow::op_array[parent]->getLevel();
-                    int lc = DataFlow::op_array[child]->getLevel();
-                    if (lp >= lc) {
-                        DataFlow::op_array[child]->setLevel(lp + 1);
-                    }
-                    q.push(child);
-                }
-            }
-        }
-    }
-    for (auto op:DataFlow::op_array) {
-        if (op.second->getType() == OP_IN) {
-            int level = 0;
-            for (auto child:DataFlow::graph[op.first]) {
-                if (DataFlow::op_array[child]->getLevel() > level) {
-                    level = DataFlow::op_array[child]->getLevel();
-                }
-            }
-            if (level > 0)
-                level = level - 1;
-            op.second->setLevel(level);
-        }
-    }
-    for (auto op:DataFlow::op_array) {
-        if (op.second->getLevel() > DataFlow::num_level) {
-            DataFlow::num_level = op.second->getLevel();
-        }
-    }
-}
-
-
-int DataFlow::getId() const {
-    return id;
-}
-
-const std::string &DataFlow::getName() const {
-    return name;
-}
-
-const std::map<int, std::vector<int>> &DataFlow::getGraph() const {
-    return graph;
-}
-
-int DataFlow::getNumOpIn() const {
-    return num_op_in;
-}
-
-int DataFlow::getNumOpOut() const {
-    return num_op_out;
-}
-
-int DataFlow::getNumOp() const {
-    return num_op;
-}
-
-void DataFlow::setId(int id) {
-    DataFlow::id = id;
-}
-
-int DataFlow::getNumEdges() const {
-    int num_edges = 0;
-    for (const auto &v:DataFlow::graph) {
-        num_edges += v.second.size();
-    }
-    return num_edges;
-}
-
-int DataFlow::getNumLevel() const {
-    return DataFlow::num_level;
-}
-std::vector<int> &DataFlow::getInputIds(){
-    return DataFlow::input_op_ids;
-}
-    
-std::vector<int> &DataFlow::getOutputIds(){
-    return DataFlow::output_op_ids;
-}
-
-Operator *DataFlow::getCOp(int c_id){
-    for (auto op:DataFlow::op_array) {
-        if (op.second->getCId() == c_id) {
-            return op.second;
-        }
-    }
-    return nullptr;
-}
-
-InputStream *DataFlow::getInOp(int in_id){
-    for (auto op:DataFlow::op_array) {
-            if (op.second->getInId() == in_id) {
-            return reinterpret_cast<InputStream*>(op.second);
-        }
-    }
-    return nullptr;
-}
-
-OutputStream *DataFlow::getOutOp(int out_id){
-    for (auto op:DataFlow::op_array) {
-        if (op.second->getOutId() == out_id) {
-            return reinterpret_cast<OutputStream*>(op.second);
-        }
-    }
-    return nullptr;
+DataFlow::~DataFlow() {
+    delete DataFlow::df;
 }
 
 void DataFlow::setInputData(int id, short * data, long size){
-    auto op = DataFlow::getInOp(id);
+    auto op = DataFlow::df->getInOp(id);
     op->setData(data,size);
 }
 
 void DataFlow::setOutputData(int id, short * data, long size){
-    auto op = DataFlow::getOutOp(id);
+    auto op = DataFlow::df->getOutOp(id);
     op->setData(data,size);
 }
 
 void DataFlow::setConstants(short * constants, int size){
     for(int i=0; i < size;i++)
-        DataFlow::getCOp(i)->setConst(constants[i]);
+        DataFlow::df->getCOp(i)->setConst(constants[i]);
 }
 
 void DataFlow::run(){
 
+    if(DataFlow::exec_type == "cpu"){
+        DataFlow::df->compute();
+    }else if(DataFlow::exec_type == "sim"){
+        DataFlow::run_on_cgra();
+    }else if(DataFlow::exec_type == "cgra"){
+        DataFlow::run_on_cgra();
+    }
+}
+
+int DataFlow::run_on_cgra() {
     int argc = FFC::getInstance()->getArgc();
     char **argv = FFC::getInstance()->getArgv();
 
-    std::string exec_type = "cpu";
+    std::string kernel_name;
+    std::string fpgaBinaryFile;
+    std::string cgra_arch;
 
-    if(argc > 1){
-        exec_type = argv[1];
+    if(argc > 2){
+        kernel_name = argv[2];
+    }
+    if(argc > 3){
+        fpgaBinaryFile = argv[3];
+    }
+    if(argc > 4){
+        cgra_arch = argv[4];
     }
 
-    if(exec_type == "cpu"){
-        DataFlow::compute();
+    auto cgraArch = new CgraArch(cgra_arch);
+    auto cgraHw = new Cgra(fpgaBinaryFile,kernel_name);
+    auto scheduler = new Scheduler(cgraArch);
+
+    int num_thr = cgraArch->getNumThreads();
+    int tries = 0;
+    int r;
+    for (int i = 0; i < num_thr; ++i) {
+        auto clone = DataFlow::df;
+        clone->setId(i);
+        scheduler->addDataFlow(clone, i, 0);
+        cgraArch->getNetBranch(i)->createRouteTable();
+        cgraArch->getNet(i)->createRouteTable();
     }
+
+    do {
+        r = scheduler->scheduling();
+        tries++;
+    } while (r != SCHEDULE_SUCCESS && tries < 10000);
+
+
+    if (r == SCHEDULE_SUCCESS) {
+        auto cgra_program = cgraArch->getCgraProgram();
+        cgraHw->loadCgraProgram(cgra_program);
+
+        auto num_in = DataFlow::df->getNumInputs();
+        auto num_out = DataFlow::df->getNumOutputs();
+
+        auto in_op = DataFlow::df->getInOp(0);
+        auto data_size = (size_t) in_op->getSize();
+        auto data_per_thread = data_size / num_thr;
+        int data_per_thread_rest = data_size % num_thr;
+        for (int m = 0; m < num_thr; ++m) {
+            for(int i = 0;i < num_in;++i){
+                auto op = DataFlow::df->getInOp(i);
+                auto data_ptr = op->getData();
+                auto size = data_per_thread;
+                if(m==num_thr-1)
+                    size += data_per_thread_rest;
+                cgraHw->setCgraProgramInputStreamByID(DataFlow::df->getId(),op->getId(), &data_ptr[m*data_per_thread], size);
+            }
+            for(int i = 0;i < num_out;++i){
+                auto op = DataFlow::df->getOutOp(i);
+                auto data_ptr = op->getData();
+                auto size = data_per_thread;
+                if(m==num_thr-1)
+                    size += data_per_thread_rest;
+                cgraHw->setCgraProgramOutputStreamByID(DataFlow::df->getId(),op->getId(), &data_ptr[m*data_per_thread], size);
+            }
+        }
+        cgraHw->syncExecute();
+    } else {
+        printf("Scheduler Error: %s\n",scheduler->getMessageError(r).c_str());
+    }
+
+    delete cgraArch;
+    delete cgraHw;
+    delete scheduler;
+
+    return r;
 }

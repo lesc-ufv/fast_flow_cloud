@@ -30,15 +30,14 @@ class XReady:
             FFC_PRJ_DIR = os.environ['FFC_PRJ_DIR']
             FFC_XREADY_API = os.environ['FFC_XREADY_API']
             self.prj_path =  os.path.join(FFC_PRJ_DIR, self.prj_name)
-            template_prj = os.path.join(FFC_XREADY_API,'template.prj')
-            try:
-                shutil.rmtree(self.prj_path)
-            except:
-                pass
 
-            sp.run(['cp','-r',template_prj,self.prj_path])
             prj_host = os.path.join(self.prj_path,'host')
             prj_src = os.path.join(self.prj_path,'host/src')
+            template_prj = os.path.join(FFC_XREADY_API,'template.prj')
+
+            if not os.path.exists(self.prj_path):
+                sp.run(['cp','-r',template_prj,self.prj_path])
+
             for s in self.sources:
                 with open(os.path.join(prj_src,s),'w') as f:
                     f.write(self.sources[s])
@@ -48,6 +47,9 @@ class XReady:
 
             with open(os.path.join(prj_host,'cgra_arch.json'),'w') as f:
                 f.write(json.dumps(self.cgra["arch"],indent=4, sort_keys=True))
+
+            with open(os.path.join(self.prj_path,'prj.json'),'w') as f:
+                f.write(json.dumps(self.json_prj,indent=4, sort_keys=True))
 
         except Exception as e:
             self.log = str(e) + '\n'
@@ -73,19 +75,19 @@ class XReady:
             prj_host = os.path.join(self.prj_path,'host')
             os.chdir(prj_host)
             if self.run_mode == 'sim':
-                args_args = ['sim',self.cgra['sim_xclbin']]
+                args_args = ['sim','KERNEL_NAME=%s'%self.cgra['kernel_name'],'SIM_XLCBIN=%s'%self.cgra['sim_xclbin']]
             elif self.run_mode == 'cgra':
-                args_args = ['cgra',self.cgra['hw_xclbin']]
+                args_args = ['cgra','KERNEL_NAME=%s'%self.cgra['kernel_name'],'HW_XLCBIN=%s'%self.cgra['hw_xclbin']]
             else:
                 args_args = ['cpu']
             args = ['make'] + args_args
+
             r = sp.run(args,stdout=sp.PIPE,stderr=sp.PIPE)
+            self.log += r.stdout.decode(encoding='UTF-8',errors='strict') + '\n'
+            self.log += r.stderr.decode(encoding='UTF-8',errors='strict') + '\n'
             if r.returncode == 0:
-                self.log += 'OUTPUT:\n'
-                self.log += r.stdout.decode(encoding='UTF-8',errors='strict') + '\n'
                 return True
             else:
-                self.log += 'ERROR:\n' + r.stderr.decode(encoding='UTF-8',errors='strict') + '\n'
                 return False
         except Exception as e:
                 self.log = str(e) + '\n'

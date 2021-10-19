@@ -284,7 +284,7 @@ void CgraArch::makeProgram() {
             PEArch *pe = e.second;
             Operator *op = pe->getOperator(j);
             if (op != nullptr) {
-                DataFlow *df = CgraArch::dataFlows[j];
+                DDataFlow *df = CgraArch::dataFlows[j];
                 CgraArch::cgra_program.initial_conf.push_back(pe->getConf(j));
                 CgraArch::cgra_program.initial_conf.push_back(pe->getPcMaxConf(j));
                 CgraArch::cgra_program.initial_conf.push_back(pe->getPcLoopConf(j));
@@ -326,11 +326,11 @@ int CgraArch::getNumThreads() {
     return num_threads;
 }
 
-void CgraArch::setDataFlow(DataFlow *df, int threadID) {
+void CgraArch::setDataFlow(DDataFlow *df, int threadID) {
     CgraArch::dataFlows[threadID] = df;
 }
 
-DataFlow *CgraArch::getDataFlow(int threadID) {
+DDataFlow *CgraArch::getDataFlow(int threadID) {
     return CgraArch::dataFlows[threadID];
 }
 

@@ -1,10 +1,12 @@
 #ifndef FFCARGS_H
 #define FFCARGS_H
 
+#include <stdlib.h>
+
 class FFC{
 private:
     int argc;
-    char *argv[];
+    char **argv;
     static FFC * ffc_;
 protected:
     FFC(){}

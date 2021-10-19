@@ -16,7 +16,7 @@ import 'brace/mode/c_cpp';
 import 'brace/theme/dawn';
 
 // initialize the content of the text editor to some C++
-$("#editor").text(`#include <iostream>\n#include <xready/xready.h>\n\nusing namespace std;\n/*\nUse the function below to run your dataflow:\nint ffc_run_dataflow(\n<main_args>,\n<datflow name>,\n<array of inputs array>,\n<array of inputs size>,\n<array of output array>,\n<array of output size>,\n<array of constants>,\nnumber_of_constants\n);\n*/\nint main(){\n\tcout << "Hello from Fast Flow Cloud!" << endl;\n\treturn 0;\n}`);
+$("#editor").text(`#include <iostream>\n#include <ffc.h>\n\nusing namespace std;\nint main(int argc, char *argv[]){\n\tFFC::getInstance()->setArgs(argc,argv);\n\tcout << "Hello from Fast Flow Cloud!" << endl;\n\treturn 0;\n}`);
     
 // initialize the editor environment using the ace library
 var editor = ace.edit("editor");

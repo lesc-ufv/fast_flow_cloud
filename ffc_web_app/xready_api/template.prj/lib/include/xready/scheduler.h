@@ -4,15 +4,15 @@
 #include <map>
 #include <queue>
 
-#include <xready/data_flow.h>
 #include <xready/cgra_arch.h>
 #include <xready/global.h>
 #include <xready/scheduler_defs.h>
+#include <xready/ddata_flow.h>
 
 class Scheduler {
 
 private:
-    std::map<int, DataFlow *> dataflows;
+    std::map<int, DDataFlow *> dataflows;
 
     std::map<int, int> dataflow_group;
 
@@ -31,7 +31,7 @@ public:
 
     ~Scheduler();
 
-    bool addDataFlow(DataFlow *df, int threadID, int groupID);
+    bool addDataFlow(DDataFlow *df, int threadID, int groupID);
 
     void setCgra(CgraArch *cgra);
 

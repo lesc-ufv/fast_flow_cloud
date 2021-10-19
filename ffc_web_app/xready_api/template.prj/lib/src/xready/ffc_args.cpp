@@ -11,6 +11,7 @@ FFC *FFC::getInstance(){
 
 void FFC::setArgs(int argc, char *argv[]){
     FFC::argc = argc;
+    FFC::argv = (char **)malloc(sizeof(char*)*argc);
     for(int i=0;i < argc;++i){
         FFC::argv[i] = argv[i];
     }

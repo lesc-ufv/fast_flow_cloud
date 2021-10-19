@@ -3,15 +3,14 @@
 
 #include <map>
 #include <fstream>
+#include <json/json.h>
 
-#include <xready/data_flow.h>
 #include <xready/operator.h>
 #include <xready/data_flow_defs.h>
 #include <xready/cgra_defs.h>
 #include <xready/pe_arch.h>
 #include <xready/omega.h>
-
-#include <json/json.h>
+#include <xready/ddata_flow.h>
 
 class CgraArch {
 
@@ -48,7 +47,7 @@ private:
 
     std::vector<Omega *> net_branchThreads;
 
-    std::map<int, DataFlow *> dataFlows;
+    std::map<int, DDataFlow *> dataFlows;
 
     cgra_program_t cgra_program;
 
@@ -91,9 +90,9 @@ public:
 
     Omega *getNetBranch(int threadID) const;
 
-    void setDataFlow(DataFlow *df, int threadID);
+    void setDataFlow(DDataFlow *df, int threadID);
 
-    DataFlow *getDataFlow(int threadID);
+    DDataFlow *getDataFlow(int threadID);
 
     PEArch *getPE(int id);
 

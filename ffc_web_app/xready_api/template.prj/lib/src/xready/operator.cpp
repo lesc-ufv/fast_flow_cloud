@@ -39,9 +39,7 @@ Operator::Operator(int id, int op_code, int type, std::string label, short const
 
 }
 
-Operator::~Operator(){
-    dst.clear();
-}
+Operator::~Operator(){}
 
 int Operator::getId() const {
     return Operator::id;
