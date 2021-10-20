@@ -180,25 +180,23 @@ bool Cgra::readProgramFile(const std::string &filePath) {
 
 bool Cgra::syncExecute() {
     auto cp = makeCopy(*Cgra::cgra_program);
-    
     auto acc = CgraFpga(cp->num_pe_io_in,cp->num_pe_io_out);
-    
-    acc.cgra_fpga_init(m_fpgaBinaryFile, m_kernel_name);
-    
+    acc.fpga_init(m_fpgaBinaryFile, m_kernel_name);
+
     std::map<int, int> pe_in_map;
     std::map<int, int> pe_out_map;
     std::map<int, int> in_pe_map;
     std::map<int, int> out_pe_map;
-    
+
     std::map<int, unsigned long> ignore_in[cp->num_pe_io_in];
     std::map<int, unsigned long> ignore_out[cp->num_pe_io_out];
-    
+
     unsigned long ignore_in_min = INT64_MAX;
     unsigned long ignore_out_min = INT64_MAX;
-    
+
     size_t total_size_in[cp->num_pe_io_in];
     size_t total_size_out[cp->num_pe_io_out];
-    
+
     auto pe_list = Cgra::makeListPe(cp->num_pe, cp->num_pe_io_in, cp->num_pe_io_out);
     auto flag_used_in_0 = false;
 
@@ -272,8 +270,8 @@ bool Cgra::syncExecute() {
     size_t cgra_intial_conf_bytes = sizeof(cgra_intial_conf_t);
     size_t conf_bytes = cp->cgra_intial_conf.qtd_conf * sizeof(initial_conf_t);
 
-    auto cgra_intial_conf_bytes_align = static_cast<size_t >((std::ceil(cgra_intial_conf_bytes / 64.0)) * 64.0);
-    auto conf_bytes_align = static_cast<size_t>((std::ceil(conf_bytes / 64.0)) * 64.0);
+    auto cgra_intial_conf_bytes_align = static_cast<size_t >((std::ceil(cgra_intial_conf_bytes / static_cast<float>(CGRA_AXI_DATA_WIDTH/8))) * static_cast<float>(CGRA_AXI_DATA_WIDTH/8));
+    auto conf_bytes_align = static_cast<size_t>((std::ceil(conf_bytes / static_cast<float>(CGRA_AXI_DATA_WIDTH/8))) * static_cast<float>(CGRA_AXI_DATA_WIDTH/8));
 
     total_size_in[0] += cgra_intial_conf_bytes_align + conf_bytes_align;
 
@@ -286,14 +284,14 @@ bool Cgra::syncExecute() {
             }
         }
     }
-    
+
     for (const auto &it:Cgra::output_queue) {
         if (total_size_out[it.first] > 0) {
             acc.createOutputQueue(static_cast<unsigned char>(it.first),
                                   static_cast<long long int>(total_size_out[it.first]));
         }
     }
-    
+
     if (!flag_used_in_0) {
         acc.createInputQueue(0, static_cast<long long int>(total_size_in[0]));
     }
@@ -325,25 +323,25 @@ bool Cgra::syncExecute() {
             }
         }
     }
-    
+
     for (int j = 0; j < cp->num_pe_io_in; ++j) {
         for (auto i : ignore_in[j]) {
             if (i.second > 0)
                 i.second -= ignore_in_min;
         }
     }
-    
+
     for (int j = 0; j < cp->num_pe_io_out; ++j) {
         for (auto i : ignore_out[j]) {
             if (i.second > 0)
                 i.second -= ignore_out_min;
         }
     }
-    
+
     queue_data_ptr = queue_data_ptr + conf_bytes_align;
     total_size_in[0] -= (conf_bytes_align + cgra_intial_conf_bytes_align);
     int ws = cp->word_size;
-    
+
     for (const auto &it:Cgra::input_queue) {
         auto queue_ptr = (unsigned char *) acc.getInputQueue((unsigned char) it.first);
         int len = total_size_in[it.first];
@@ -371,9 +369,9 @@ bool Cgra::syncExecute() {
             }
         }
     }
-        
-    acc.cgra_execute();
-    
+
+    acc.execute();
+
     for (const auto &it:Cgra::output_queue) {
         auto queue_ptr = (unsigned char *) acc.getOutputQueue((unsigned char) it.first);
         int len = total_size_out[it.first];
@@ -398,9 +396,9 @@ bool Cgra::syncExecute() {
             }
         }
     }
-    
-    //acc.cgra_print_report();    
-    Cgra::timeExecCgra = acc.get_time(3);
+
+
+    Cgra::timeExecCgra = acc.get_time(4);
     acc.cleanup();
     freeProgram(cp);
     return true;
@@ -453,7 +451,7 @@ cgra_program_t *Cgra::makeCopy(cgra_program_t cp) {
 }
 
 void Cgra::printProgram(cgra_program_t * cp){
-    
+
   std::cout << "--------------------------CGRA PROGRAM--------------------------" << std::endl;
   std::cout << "- ID:" << cp->cgra_id << std::endl;
   std::cout << "- NUM PE:" << cp->num_pe << std::endl;
@@ -468,7 +466,7 @@ void Cgra::printProgram(cgra_program_t * cp){
   std::cout << "- MASK OUT:"<< std::bitset<32>(cp->cgra_intial_conf.mask_output_fifo) << std::endl;
   std::cout << "- ------------------------CGRA BITSTREAM-------------------" << std::endl;
   for(auto conf:cp->initial_conf){
-      std::cout << "- CONF:"<< std::bitset<64>(conf.pad) << std::endl; 
+      std::cout << "- CONF:"<< std::bitset<64>(conf.pad) << std::endl;
   }
 }
 

@@ -32,15 +32,15 @@ $(EXECUTABLE): check-xrt $(HOST_SRCS)
 	
 .PHONY: cpu
 cpu: host
-	@LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "cpu"
+	@LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "cpu" $(KERNEL_NAME) $(SIM_XCLBIN) cgra_arch.json
 
 .PHONY: sim	
 sim: host simconf emconfig
-	@XCL_EMULATION_MODE=$(TARGET) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "sim" $(KERNEL_NAME) $(SIM_XLCBIN)  cgra_arch.json
+	@XCL_EMULATION_MODE=$(TARGET) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "sim" $(KERNEL_NAME) $(SIM_XCLBIN)  cgra_arch.json
 
 .PHONY: cgra
 cgra: host
-	@LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "cgra" $(KERNEL_NAME) $(HW_XLCBIN) cgra_arch.json
+	@LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(LIB_READY) $(EXECUTABLE) "cgra" $(KERNEL_NAME) $(HW_XCLBIN) cgra_arch.json
 
 .PHONY:emconfig
 emconfig: emconfig.json

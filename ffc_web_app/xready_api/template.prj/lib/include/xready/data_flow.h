@@ -15,8 +15,10 @@ class DataFlow {
 private:
     std::string exec_type;
     std::string name;
-
-    DDataFlow *df;
+    CgraArch *cgraArch;
+    Cgra *cgraHw;
+    Scheduler *scheduler;
+    std::vector<DDataFlow *> data_flows;
     int run_on_cgra();
 
 public:

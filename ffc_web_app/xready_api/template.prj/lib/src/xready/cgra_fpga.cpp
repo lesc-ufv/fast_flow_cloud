@@ -18,7 +18,7 @@ CgraFpga::CgraFpga(int num_inputs, int num_outputs):m_input_buffer(num_inputs),
     memset(m_output_size_bytes, 0, sizeof(size_t) * num_outputs);
 }
 
-int CgraFpga::cgra_fpga_init(std::string &binary_file, std::string kernel_name){
+int CgraFpga::fpga_init(std::string &binary_file, std::string kernel_name){
 
   TIMER_START(INIT_TIMER_ID);
   cl_int err;
@@ -61,7 +61,7 @@ int CgraFpga::cgra_fpga_init(std::string &binary_file, std::string kernel_name){
     
 }
 
-void * CgraFpga::cgra_allocate_mem_align(size_t size){
+void * CgraFpga::allocate_mem_align(size_t size){
     
     void *ptr;
     if( posix_memalign((void**)&ptr,4096,size) == 0){
@@ -72,7 +72,7 @@ void * CgraFpga::cgra_allocate_mem_align(size_t size){
 
 void CgraFpga::createInputQueue(int input_id, size_t size){
     if(input_id >= 0 && input_id < m_num_inputs){
-        m_inputs_ptr[input_id] = cgra_allocate_mem_align(size);
+        m_inputs_ptr[input_id] = allocate_mem_align(size);
         m_input_size_bytes[input_id] = size;
         OCL_CHECK(err,
                   m_input_buffer[input_id] = cl::Buffer(m_context,
@@ -91,7 +91,7 @@ void * CgraFpga::getInputQueue(int input_id){
   
 void CgraFpga::createOutputQueue(int output_id, size_t size){
     if(output_id >= 0 && output_id < m_num_outputs){
-        m_outputs_ptr[output_id] = cgra_allocate_mem_align(size);
+        m_outputs_ptr[output_id] = allocate_mem_align(size);
         m_output_size_bytes[output_id] = size;
         
         OCL_CHECK(err,
@@ -110,7 +110,7 @@ void * CgraFpga::getOutputQueue(int output_id){
     return nullptr; 
 }
 
-void CgraFpga::cgra_set_args(){
+void CgraFpga::set_args(){
     
     int id = m_num_inputs + m_num_outputs;
     for(int i = 0; i < m_num_inputs;++i){
@@ -132,11 +132,11 @@ void CgraFpga::cgra_set_args(){
     }
 }
 
-int CgraFpga::cgra_execute(){
-   
+int CgraFpga::execute(){
+  
     TIMER_START(TOTAL_EXE_TIMER_ID);
     {
-        cgra_set_args();
+        set_args();
         TIMER_START(DATA_CPY_HtoD);
         {
             // Copy input data to device global memory
@@ -160,7 +160,7 @@ int CgraFpga::cgra_execute(){
         TIMER_STOP_ID(DATA_CPY_DtoH);
     
     }
-    TIMER_STOP_ID(TOTAL_EXE_TIMER_ID);       
+    TIMER_STOP_ID(TOTAL_EXE_TIMER_ID);
 
     return 0;
 }
@@ -183,7 +183,7 @@ int CgraFpga::cleanup(){
     return 0;
 }
 
-int CgraFpga::cgra_print_report(){
+int CgraFpga::print_report(){
     printf("------------------------------------------------------\n");
     printf("  Performance Summary                                 \n");
     printf("------------------------------------------------------\n");

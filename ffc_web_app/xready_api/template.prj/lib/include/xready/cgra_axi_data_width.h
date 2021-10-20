@@ -1,0 +1,1 @@
+#define CGRA_AXI_DATA_WIDTH 64

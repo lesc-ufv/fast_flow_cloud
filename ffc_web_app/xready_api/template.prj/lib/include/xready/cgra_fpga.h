@@ -23,51 +23,51 @@ using namespace std::chrono;
 //typedef unsigned char byte;
 
 class CgraFpga{
-    
+
 private:
   cl::Context m_context;
   cl::CommandQueue m_q;
   cl::Program m_prog;
   cl::Kernel m_kernel;
-  
+
   std::vector<cl::Memory> m_input_buffer;
   std::vector<cl::Memory> m_output_buffer;
-  
+
   int m_num_inputs;
   int m_num_outputs;
-  
+
   size_t *m_input_size_bytes;
   size_t *m_output_size_bytes;
-    
+
   cl_int err;
-  
+
   void ** m_inputs_ptr;
   void ** m_outputs_ptr;
 
-  void cgra_set_args();
-  
-  void * cgra_allocate_mem_align(size_t size);
-      
+  void set_args();
+
+  void * allocate_mem_align(size_t size);
+
 public:
-        
-  CgraFpga(int num_inputs, int num_outputs);  
-  
-  int cgra_fpga_init(std::string &binary_file, std::string kernel_name);
-  
+
+  CgraFpga(int num_inputs, int num_outputs);
+
+  int fpga_init(std::string &binary_file, std::string kernel_name);
+
   void createInputQueue(int input_id, size_t size);
-  
+
   void * getInputQueue(int input_id);
-  
+
   void createOutputQueue(int output_id, size_t size);
-  
+
   void * getOutputQueue(int output_id);
-  
-  int cgra_execute();
-     
+
+  int execute();
+
   int cleanup();
-      
-  int cgra_print_report();
-  
+
+  int print_report();
+
   double get_time(int timer_id);
-    
+
 };

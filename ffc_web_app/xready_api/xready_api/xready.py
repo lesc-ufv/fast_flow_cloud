@@ -72,19 +72,26 @@ class XReady:
 
     def compile_and_exec_host(self):
         try:
+            FFC_XREADY_REPO=os.environ['FFC_XREADY_REPO']
             prj_host = os.path.join(self.prj_path,'host')
+            sim_xclbin = os.path.join(FFC_XREADY_REPO,self.cgra['sim_xclbin'])
+            hw_xclbin = os.path.join(FFC_XREADY_REPO,self.cgra['hw_xclbin'])
             os.chdir(prj_host)
             if self.run_mode == 'sim':
-                args_args = ['sim','KERNEL_NAME=%s'%self.cgra['kernel_name'],'SIM_XLCBIN=%s'%self.cgra['sim_xclbin']]
+                args_args = ['sim','KERNEL_NAME=%s'%self.cgra['kernel_name'],'SIM_XCLBIN=%s'%sim_xclbin]
             elif self.run_mode == 'cgra':
-                args_args = ['cgra','KERNEL_NAME=%s'%self.cgra['kernel_name'],'HW_XLCBIN=%s'%self.cgra['hw_xclbin']]
+                args_args = ['cgra','KERNEL_NAME=%s'%self.cgra['kernel_name'],'HW_XCLBIN=%s'%hw_xclbin]
             else:
-                args_args = ['cpu']
-            args = ['make'] + args_args
+                args_args = ['cpu','KERNEL_NAME=%s'%self.cgra['kernel_name'],'SIM_XCLBIN=%s'%sim_xclbin]
 
-            r = sp.run(args,stdout=sp.PIPE,stderr=sp.PIPE)
-            self.log += r.stdout.decode(encoding='UTF-8',errors='strict') + '\n'
-            self.log += r.stderr.decode(encoding='UTF-8',errors='strict') + '\n'
+            args = ['make'] + args_args
+            r = sp.Popen(" ".join(args), stdout=sp.PIPE,stderr=sp.PIPE, shell=True)
+            out = r.stdout.read().decode(encoding='UTF-8',errors='strict')
+            if '--split--' in out:
+                out = out.split('--split--\n')[1]
+
+            self.log += out + '\n'
+            self.log += r.stderr.read().decode(encoding='UTF-8',errors='strict') + '\n'
             if r.returncode == 0:
                 return True
             else:

@@ -10,9 +10,11 @@ FFC_ROOT=`cd $MYPATH/.. && pwd`
 FFC_PRJ_DIR=$FFC_ROOT/ffc_projects
 FFC_CGRA_DB=$FFC_ROOT/cgra_db
 FFC_XREADY_API=$FFC_ROOT/xready_api
+FFC_XREADY_REPO=$FFC_ROOT/xready_repo
 
 export FFC_ROOT
 export FFC_PRJ_DIR
 export FFC_CGRA_DB
 export FFC_XREADY_API
 export PYTHONPATH=$FFC_XREADY_API:$PYTHONPATH
+export FFC_XREADY_REPO

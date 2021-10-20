@@ -130,6 +130,8 @@ dmypy.json
 # Node Modules
 node_modules/
 
+# FFC dirs
 logs/*
 ffc_web_app/ffc_projects/*
-
+ffc_web_app/xready_repo/*
+ffc_web_app/cgra_db/*

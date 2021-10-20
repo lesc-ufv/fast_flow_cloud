@@ -13,6 +13,7 @@
 #include <xready/input_stream.h>
 #include <xready/output_stream.h>
 #include <xready/cgra_fpga.h>
+#include <xready/cgra_axi_data_width.h>
 
 using namespace std::chrono;
 using namespace std;
@@ -21,9 +22,9 @@ class Cgra {
 
 private:
     double timeExecCgra;
-    
+
     std::string m_fpgaBinaryFile;
-    std::string m_kernel_name; 
+    std::string m_kernel_name;
     // key = Input ID, Value = key = ThreadID value =  ( Pointer Data, Size Data)
     std::map<int, std::map<int, std::pair<unsigned char *, size_t >>> input_queue;
     // key = Output ID, Value = key = ThreadID value =  ( Pointer Data, Size Data)
@@ -51,7 +52,7 @@ public:
     bool loadCgraProgram(cgra_program_t cp);
 
     bool setCgraProgramInputStreamByOp(InputStream *op);
-    
+
     bool setCgraProgramInputStreamByID(int dataFlowID, int inputStreamID, const void *inputStreamData, size_t size);
 
     bool
@@ -59,7 +60,7 @@ public:
                                     size_t size);
 
     bool setCgraProgramOutputStreamByOp(OutputStream *op);
-    
+
     bool setCgraProgramOutputStreamByID(int dataFlowID, int outputStreamID, void *outputStreamData, size_t size);
 
     bool
@@ -69,7 +70,7 @@ public:
     bool syncExecute();
 
     cgra_program_t *getCgraProgram();
-    
+
     void printProgram(cgra_program_t * cp);
 
     double getTimeExec();

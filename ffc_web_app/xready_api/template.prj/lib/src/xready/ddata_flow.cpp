@@ -8,19 +8,6 @@ DDataFlow::DDataFlow(int id, std::string name) :
         num_op(0),
         num_level(0) {}
 
-DDataFlow::DDataFlow(const DDataFlow &df){
-    DDataFlow::id = -1;
-    DDataFlow::name = df.name;
-    DDataFlow::op_array = df.op_array;
-    DDataFlow::graph = df.graph;
-    DDataFlow::input_op_ids = df.input_op_ids;
-    DDataFlow::output_op_ids = df.output_op_ids;
-    DDataFlow::num_op_in = df.num_op_in;
-    DDataFlow::num_op_out = df.num_op_out;
-    DDataFlow::num_op = df.num_op;
-    DDataFlow::num_level = df.num_level;
-}
-
 DDataFlow::~DDataFlow() { }
 
 void DDataFlow::addOperator(Operator *op) {
@@ -314,6 +301,10 @@ int DDataFlow::getNumNodes() const {
 
 void DDataFlow::setId(int id) {
     DDataFlow::id = id;
+    for (auto item:DDataFlow::op_array) {
+        auto op = item.second;
+        op->setDataFlowId(id);
+    }
 }
 
 int DDataFlow::getNumEdges() const {

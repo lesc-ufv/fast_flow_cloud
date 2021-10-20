@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <map>
+#include <xready/cgra_axi_data_width.h>
 
 typedef enum cgra_conf_type_t {
     CGRA_CONF_SET_PE_INSTRUCTION = 1,
@@ -21,15 +22,25 @@ typedef enum cgra_conf_type_t {
 } cgra_conf_type_t;
 
 typedef struct cl_t {
-    unsigned long dword[8];
+    unsigned char dword[CGRA_AXI_DATA_WIDTH/8];
 } cl_t;
 
 typedef struct cgra_intial_conf_t {
     union {
-        cl_t cache_line;
+        cl_t cache_line1;
         struct {
             unsigned int qtd_conf;
+        };
+    };
+    union {
+        cl_t cache_line2;
+        struct {
             unsigned int mask_input_fifo;
+        };
+    };
+    union {
+        cl_t cache_line3;
+        struct {
             unsigned int mask_output_fifo;
         };
     };
