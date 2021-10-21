@@ -85,13 +85,11 @@ void Dataflow::setConstants(short * constants, int size){
 void Dataflow::run(){
 
     if(Dataflow::exec_type == "cpu"){
-        for(auto d : Dataflow::data_flows){
-            #pragma omp task
-            {
-                d->compute();
-            }
+        int len = Dataflow::data_flows.size();
+        #pragma omp parallel for
+        for(int i = 0;i < len;++i){
+                Dataflow::data_flows[i]->compute();
         }
-
     }else if(Dataflow::exec_type == "sim" || Dataflow::exec_type == "cgra"){
         Dataflow::run_on_cgra();
     }
@@ -116,14 +114,8 @@ int Dataflow::run_on_cgra() {
     if (r == SCHEDULE_SUCCESS) {
         auto cgra_program = Dataflow::cgraArch->getCgraProgram();
         Dataflow::cgraHw->loadCgraProgram(cgra_program);
-
         auto num_in = Dataflow::data_flows[0]->getNumInputs();
         auto num_out = Dataflow::data_flows[0]->getNumOutputs();
-
-        auto in_op = Dataflow::data_flows[0]->getInOp(0);
-        auto data_size = (size_t) in_op->getSize();
-        auto data_per_thread = data_size / num_thr;
-        int data_per_thread_rest = data_size % num_thr;
         for (int m = 0; m < num_thr; ++m) {
             auto df = Dataflow::data_flows[m];
             for(int i = 0;i < num_in;++i){
