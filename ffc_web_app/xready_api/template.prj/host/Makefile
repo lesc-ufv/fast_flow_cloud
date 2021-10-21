@@ -4,7 +4,7 @@ HOST_ARCH = x86
 
 LIB_READY=$(shell readlink -f ../lib/lib/)
 
-CXXFLAGS += $(opencl_CXXFLAGS) -Wall -O3 -g -std=c++11
+CXXFLAGS += $(opencl_CXXFLAGS) -Wall -O3 -g -std=c++11 -fopenmp
 LDFLAGS += $(opencl_LDFLAGS)
 
 CXXFLAGS += -I$(shell readlink -f ./include) -I$(shell readlink -f ../lib/include/)
