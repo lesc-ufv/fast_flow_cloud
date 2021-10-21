@@ -5,6 +5,6 @@
 #include <xready/cgra_arch.h>
 #include <xready/scheduler.h>
 #include <xready/ffc_args.h>
-#include <xready/data_flow.h>
+#include <xready/dataflow.h>
 
 #endif //FFC_H

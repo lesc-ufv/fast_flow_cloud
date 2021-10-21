@@ -268,7 +268,7 @@ $('#run').click((event) => {
         }
         $.ajax({ 
             type: "GET",
-            url: 'http://54.165.43.92:8000/exec_code',
+            url: 'http://54.144.151.112:8000/exec_code',
             data: {
                 "data": JSON.stringify(finalJson)
             },
