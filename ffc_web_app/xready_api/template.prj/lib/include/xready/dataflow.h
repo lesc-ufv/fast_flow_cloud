@@ -10,7 +10,7 @@
 #include <xready/cgra_arch.h>
 #include <xready/scheduler.h>
 
-class DataFlow {
+class Dataflow {
 
 private:
     std::string exec_type;
@@ -23,9 +23,9 @@ private:
 
 public:
 
-    DataFlow(std::string json_name);
+    Dataflow(std::string json_name);
 
-    ~DataFlow();
+    ~Dataflow();
 
     void setInputData(int id, short * data, long size);
 
