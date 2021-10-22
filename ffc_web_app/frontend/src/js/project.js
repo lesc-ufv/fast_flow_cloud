@@ -162,6 +162,8 @@ function standardizeDfgJson(json) {
                 "id": contNodes,
                 "old_id": json[index].data.id,
                 "in_id": json[index].data.in_id,
+                "out_id": -1,
+                "const_id": -1,
                 "label": json[index].data.type,
                 "opcode": json[index].data.type,
             });
@@ -170,6 +172,8 @@ function standardizeDfgJson(json) {
                 "id": contNodes,
                 "old_id": json[index].data.id,
                 "out_id": json[index].data.out_id,
+                "in_id": -1,
+                "const_id": -1,
                 "label": json[index].data.type,
                 "opcode": json[index].data.type,
             });
@@ -180,6 +184,8 @@ function standardizeDfgJson(json) {
                 "label": json[index].data.type,
                 "opcode": json[index].data.type,
                 "const_id": -1,
+                "in_id": -1,
+                "out_id": -1,
             });
             }
             contNodes++;
@@ -227,12 +233,9 @@ function standardizeDfgJson(json) {
             "id": nodes[index].id,
             "label": nodes[index].label,
             "opcode": nodes[index].opcode,
+            "in_id": nodes[index].in_id,
+            "out_id": nodes[index].out_id,
             "const_id": nodes[index].const_id,
-        }
-        if(n.label == 'input'){
-            n['in_id'] = nodes[index].in_id;
-        }else if(n.label== 'output'){
-            n['out_id'] = nodes[index].out_id;
         }
         res.nodes.push(n);
     }
@@ -267,8 +270,8 @@ $('#run').click((event) => {
             "run_mode": $("input[name=type_run]:checked").val()
         }
         $.ajax({ 
+            url: 'http://192.168.100.26:8000/exec_code',
             type: "GET",
-            url: 'http://54.144.151.112:8000/exec_code',
             data: {
                 "data": JSON.stringify(finalJson)
             },

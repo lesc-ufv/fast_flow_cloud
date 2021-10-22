@@ -192,17 +192,19 @@ void DDataFlow::fromJSON(const std::string &fileNamePath) {
     }
 
     for (auto e:df["nodes"]) {
-        int id = e["id"].asInt();
-        std::string opcode = e["opcode"].asString();
+        auto id = e["id"].asInt();
+        auto opcode = e["opcode"].asString();
+        auto in_id = e["in_id"].asInt();
+        auto out_id = e["out_id"].asInt();
+        auto c_id = e["const_id"].asInt();
+        if(c_id >= 0){
+            opcode += "i";
+        }
         auto params = Params(id, 0, nullptr, 0);
         auto op = OperatorFactory::Get()->CreateOperator(opcode, params);
-        if(opcode == "input"){
-            op->setInId(e["in_id"].asInt());
-        }else if(opcode == "output"){
-            op->setOutId(e["out_id"].asInt());
-        }else{
-            op->setCId(e["const_id"].asInt());
-        }
+        op->setInId(in_id);
+        op->setOutId(out_id);
+        op->setCId(c_id);
         DDataFlow::addOperator(op);
     }
 

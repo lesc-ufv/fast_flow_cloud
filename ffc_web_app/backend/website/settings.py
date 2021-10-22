@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-27zzs*hsl6qk1)9ghhl@r!ef=ci2bit2wfbvp1-#z)nlw0%c1r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["54.144.151.112"]
+import socket
+myip = socket.gethostbyname(socket.gethostname())
+ALLOWED_HOSTS = [myip]
 
 
 # Application definition

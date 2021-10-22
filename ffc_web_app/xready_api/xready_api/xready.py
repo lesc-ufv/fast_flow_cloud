@@ -8,7 +8,7 @@ import shutil
 class XReady:
     def __init__(self, json_prj):
         self.json_prj = json_prj
-        self.prj_name =self.json_prj['project_name']
+        self.prj_name = "".join(self.json_prj['project_name'].split(' '))
         self.sources = self.json_prj['sources']
         self.df = self.json_prj['dataflows'][0]
         self.cgra_name = self.json_prj['cgra_name']
