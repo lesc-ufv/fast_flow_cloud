@@ -197,6 +197,13 @@ void DDataFlow::fromJSON(const std::string &fileNamePath) {
         auto in_id = e["in_id"].asInt();
         auto out_id = e["out_id"].asInt();
         auto c_id = e["const_id"].asInt();
+
+        if(opcode == "reg" && c_id >= 0){
+            opcode = "pass_b";
+        }else if(opcode == "reg"){
+            opcode = "pass_a";
+        }
+
         if(c_id >= 0){
             opcode += "i";
         }

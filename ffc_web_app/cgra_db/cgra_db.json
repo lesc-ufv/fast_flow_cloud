@@ -1,7 +1,7 @@
 {
     "cgra_128_8_8_16":{
         "kernel_name": "cgra_128_8_8_16",
-        "sim_xclbin": "cgra_128_8_8_16.hw_emu.xclbin",
+        "sim_xclbin": "cgra_128_8_8_16/xilinx_aws_f1/hw/simulate/build_dir.hw_emu.xilinx_aws-vu9p-f1_shell-v04261818_201920_2/cgra_128_8_8_16.xclbin",
         "hw_xclbin": "cgra_128_8_8_16.hw.xclbin",
         "lib":"cgra_128_8_8_16/xilinx_aws_f1/sw/lib",
         "arch":{"id": 0, "num_pe": 128, "num_pe_in": 8, "num_pe_out": 8, "data_width": 16, "net_radix": 8, "extra_stagies": 1, "conf_depth": 1, "conf_bus_width": 8, "conf_bus_pipe": 1, "axi_data_width": 64}
