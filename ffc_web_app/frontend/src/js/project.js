@@ -242,6 +242,12 @@ function standardizeDfgJson(json) {
     return res;
 }
 
+function getAPI_IP(){
+    var host_ip = location.host;
+    host_ip = host_ip.split(":")[0];
+    return "http://"+host_ip+":8000/exec_code";
+}
+
 $("#settings").click((event) => {
     event.preventDefault();
     $('#modal-settings').modal({backdrop: 'static', keyboard: false});
@@ -270,7 +276,8 @@ $('#run').click((event) => {
             "run_mode": $("input[name=type_run]:checked").val()
         }
         $.ajax({ 
-            url: 'http://192.168.100.26:8000/exec_code',
+            //url: 'http://192.168.15.9:8000/exec_code',
+            url:getAPI_IP(),
             type: "GET",
             data: {
                 "data": JSON.stringify(finalJson)
