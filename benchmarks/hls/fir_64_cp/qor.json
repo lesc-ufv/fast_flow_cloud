@@ -1,0 +1,27 @@
+{
+    "containers": [
+        {
+            "name": "krnl_fir_64_cp",
+            "meet_system_timing": "true", 
+            "accelerators": [
+                {
+                    "name": "krnl_fir_64_cp",
+                    "check_timing": "true", 
+                    "PipelineType": "none", 
+                    "check_latency": "true", 
+                    "check_warning": "false", 
+                    "loops": [
+                        {
+                            "name": "read1", 
+                            "PipelineII": "1"
+                        }, 
+                        {
+                            "name": "fir_64_cp_writeC",
+                            "PipelineII": "1"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

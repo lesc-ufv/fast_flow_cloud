@@ -1,0 +1,27 @@
+{
+    "containers": [
+        {
+            "name": "krnl_sobel_naive", 
+            "meet_system_timing": "true", 
+            "accelerators": [
+                {
+                    "name": "krnl_sobel_naive", 
+                    "check_timing": "true", 
+                    "PipelineType": "none", 
+                    "check_latency": "true", 
+                    "check_warning": "false", 
+                    "loops": [
+                        {
+                            "name": "read1", 
+                            "PipelineII": "1"
+                        }, 
+                        {
+                            "name": "sobel_naive_writeC", 
+                            "PipelineII": "1"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
